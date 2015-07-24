@@ -46,7 +46,7 @@ public class SimplyContainer extends Container {
         {
             this.addSlotToContainer(new Slot(inventoryPlayer, l, 8 + l * 18, 142));
         }
-
+        System.out.println("Add all slot");
     }
 
     @Override

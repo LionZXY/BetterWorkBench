@@ -19,6 +19,7 @@ public class BetterWorkBench {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
-
+        proxy.registerProxies();
+        BetterWorkBenchBlocks.addBlock();
     }
 }
