@@ -6,12 +6,12 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by nikit_000 on 25.07.2015.
  */
-public class IEnergyRecipe {
+public class EnergyRecipe {
     private CraftItem[] recipe;
     int craftHeight;//Высота
     boolean shaples;
     private ItemStack craftOutput;
-    IEnergyRecipe(ItemStack craftOutput,int craftHeight,boolean shaples,CraftItem ... craftItem){
+    EnergyRecipe(ItemStack craftOutput, int craftHeight, boolean shaples, CraftItem... craftItem){
        this.craftHeight=craftHeight;
        this.recipe=craftItem;
        this.shaples=shaples;
