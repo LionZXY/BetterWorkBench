@@ -1,15 +1,18 @@
 package com.lionzxy.betterworkbench.common.container;
 
-import com.lionzxy.betterworkbench.BetterWorkBenchBlocks;
-import com.lionzxy.betterworkbench.common.inventory.SimplyInventory;
-import com.lionzxy.betterworkbench.common.listcraft.VanillaCraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
+
+import com.lionzxy.betterworkbench.common.Blocks;
+import com.lionzxy.betterworkbench.common.inventory.SimplyInventory;
+import com.lionzxy.betterworkbench.common.listcraft.VanillaCraft;
 
 /**
  * Created by nikit_000 on 24.07.2015.
@@ -114,7 +117,7 @@ public class SimplyContainer extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer p_75145_1_) {
 
-        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != BetterWorkBenchBlocks.simplyWorkbench ? false : p_75145_1_.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
+        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != Blocks.mSimpleWorkbench ? false : p_75145_1_.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
     }
     public void onCraftMatrixChanged(IInventory p_75130_1_)
     {

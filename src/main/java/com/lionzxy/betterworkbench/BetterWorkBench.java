@@ -10,9 +10,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 
-/**
- * Created by nikit_000 on 24.07.2015.
- */
 @Mod(modid = BetterWorkBenchVersion.MODID, name = BetterWorkBenchVersion.NAME, version = BetterWorkBenchVersion.VERSION)
 public class BetterWorkBench {
 
