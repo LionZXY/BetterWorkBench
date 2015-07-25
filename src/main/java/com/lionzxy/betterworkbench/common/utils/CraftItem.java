@@ -3,31 +3,26 @@ package com.lionzxy.betterworkbench.common.utils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-/**
- * Created by nikit_000 on 24.07.2015.
- */
 public class CraftItem {
-    public ItemStack itemStack;
-    public String oreDictionary;
-    CraftItem(String oreDictionary){
-       this.oreDictionary=oreDictionary;
+	
+    public ItemStack mItemStack;
+    public String    mOreDictionary;
+    
+    public CraftItem(String aOreDictionary) {
+       this.mOreDictionary = aOreDictionary;
     }
-    CraftItem(ItemStack itemStack){
-        this.itemStack=itemStack;
+    
+    public CraftItem(ItemStack aItemStack){
+        this.mItemStack = aItemStack;
     }
-    boolean check(ItemStack inItemStack) {
-        if (itemStack != null) {
-            return inItemStack.getItem() == itemStack.getItem() && itemStack.stackSize <= inItemStack.stackSize;
-        } else if (oreDictionary != null) {
-            for (int i = 0; i < OreDictionary.getOres(oreDictionary).size(); i++) {
-                if (OreDictionary.getOres(oreDictionary).get(i) == new ItemStack(inItemStack.getItem())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else{
-            if(inItemStack==null){return true;}else{return false;}
+    
+    boolean check(ItemStack aItemStack) {
+        if (mItemStack != null) {
+            return aItemStack.getItem() == mItemStack.getItem() && mItemStack.stackSize <= aItemStack.stackSize;
+        } else if (mOreDictionary != null && aItemStack != null) {
+            return OreDictionary.getOres(mOreDictionary).contains(aItemStack.getItem());
+        } else {
+            return (aItemStack == null);
         }
     }
 

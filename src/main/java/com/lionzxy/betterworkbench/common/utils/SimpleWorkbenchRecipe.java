@@ -5,6 +5,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
+/*
+ *  Не понимаю смысл этого класса. Разве нельзя использовать ванильные
+ *  рецепты?
+ *  
+ *  @deprecated Ненужный класс?
+ */
+@Deprecated
 public class SimpleWorkbenchRecipe implements IRecipe {
 
 	/*

@@ -1,11 +1,15 @@
 package com.lionzxy.betterworkbench.common.utils;
 
-import com.lionzxy.betterworkbench.common.tiles.EnergyWorkbenchTile;
 import net.minecraft.item.ItemStack;
 
-/**
- * Created by nikit_000 on 25.07.2015.
+// Костыли и велосипеды!
+
+/*
+ * Честно говоря, я не поняла, как этот класс вообще должен
+ * работать, поэтому я просто напишу свой, а этот трогать
+ * не буду
  */
+
 public class EnergyRecipe {
     private CraftItem[][] recipe;
     boolean shaples;
