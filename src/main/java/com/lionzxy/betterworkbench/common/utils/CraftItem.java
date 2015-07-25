@@ -3,26 +3,26 @@ package com.lionzxy.betterworkbench.common.utils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+/**
+ * Created by nikit_000 on 24.07.2015.
+ */
 public class CraftItem {
-	
-    public ItemStack mStack;
-    public String 	 mDictionaryEntry;
-    
-    public CraftItem(String aDictionaryEntry) {
-       this.mStack = null;
-       this.mDictionaryEntry = aDictionaryEntry;
+    public ItemStack itemStack;
+    public String oreDictionary;
+    CraftItem(String oreDictionary){
+       this.oreDictionary=oreDictionary;
     }
-    
-    public CraftItem(ItemStack aItemStack) {
-    	this.mStack = aItemStack;
-        this.mDictionaryEntry = null;
+    CraftItem(ItemStack itemStack){
+        this.itemStack=itemStack;
     }
-    
-    boolean check(ItemStack aStack) {
-        if(mStack != null){
-            return mStack == aStack;
-        } else {
-        	return OreDictionary.getOres(mDictionaryEntry).contains(aStack);
+    boolean check(ItemStack inItemStack){
+        if(itemStack!=null){
+            return inItemStack.getItem()==itemStack.getItem()&&itemStack.stackSize<=inItemStack.stackSize;
+        }else{
+            for(int i=0;i<OreDictionary.getOres(oreDictionary).size();i++){
+                if(OreDictionary.getOres(oreDictionary).get(i)==inItemStack){return true;}
+            }
+            return false;
         }
     }
 

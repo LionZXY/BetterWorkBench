@@ -1,7 +1,6 @@
 package com.lionzxy.betterworkbench.common.listcraft;
 
 import com.lionzxy.betterworkbench.common.inventory.SimplyInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
