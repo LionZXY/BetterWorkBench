@@ -15,14 +15,19 @@ public class CraftItem {
     CraftItem(ItemStack itemStack){
         this.itemStack=itemStack;
     }
-    boolean check(ItemStack inItemStack){
-        if(itemStack!=null){
-            return inItemStack.getItem()==itemStack.getItem()&&itemStack.stackSize<=inItemStack.stackSize;
-        }else{
-            for(int i=0;i<OreDictionary.getOres(oreDictionary).size();i++){
-                if(OreDictionary.getOres(oreDictionary).get(i)==inItemStack){return true;}
+    boolean check(ItemStack inItemStack) {
+        if (itemStack != null) {
+            return inItemStack.getItem() == itemStack.getItem() && itemStack.stackSize <= inItemStack.stackSize;
+        } else if (oreDictionary != null) {
+            for (int i = 0; i < OreDictionary.getOres(oreDictionary).size(); i++) {
+                if (OreDictionary.getOres(oreDictionary).get(i) == new ItemStack(inItemStack.getItem())) {
+                    return true;
+                }
             }
             return false;
+        }
+        else{
+            if(inItemStack==null){return true;}else{return false;}
         }
     }
 
