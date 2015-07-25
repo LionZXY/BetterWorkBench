@@ -10,14 +10,14 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 
-@Mod(modid = BetterWorkBenchVersion.MODID, name = BetterWorkBenchVersion.NAME, version = BetterWorkBenchVersion.VERSION)
-public class BetterWorkBench {
+@Mod(modid = BetterWorkbenchVersion.MODID, name = BetterWorkbenchVersion.NAME, version = BetterWorkbenchVersion.VERSION)
+public class BetterWorkbench {
 
     @SidedProxy(clientSide = "com.lionzxy.betterworkbench.proxy.ProxyClient", serverSide = "com.lionzxy.betterworkbench.proxy.ProxyServer")
     public static ProxyCommon proxy;
 
     @Mod.Instance
-    public static BetterWorkBench INSTANCE;
+    public static BetterWorkbench INSTANCE;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent aEvent){

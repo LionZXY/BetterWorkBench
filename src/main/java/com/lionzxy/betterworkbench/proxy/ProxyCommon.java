@@ -1,6 +1,6 @@
 package com.lionzxy.betterworkbench.proxy;
 
-import com.lionzxy.betterworkbench.BetterWorkBench;
+import com.lionzxy.betterworkbench.BetterWorkbench;
 import com.lionzxy.betterworkbench.BetterWorkBenchGuiHandler;
 import com.lionzxy.betterworkbench.common.Blocks;
 
@@ -12,7 +12,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 public class ProxyCommon {
 
 	public void preInit(FMLPreInitializationEvent aEvent) {
-		NetworkRegistry.INSTANCE.registerGuiHandler(BetterWorkBench.INSTANCE, new BetterWorkBenchGuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(BetterWorkbench.INSTANCE, new BetterWorkBenchGuiHandler());
 		Blocks.initialize();
 	}
 	

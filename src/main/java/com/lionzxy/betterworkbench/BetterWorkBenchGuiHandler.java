@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class BetterWorkBenchGuiHandler implements IGuiHandler {
     public static final int SIMPLY_WORKBENCH_BLOCK=1;
 
-    public static ResourceLocation resourceLocationSimply=new ResourceLocation(BetterWorkBenchVersion.MODID,"textures/gui/crafting_table.png");
+    public static ResourceLocation resourceLocationSimply=new ResourceLocation(BetterWorkbenchVersion.MODID,"textures/gui/crafting_table.png");
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID){
