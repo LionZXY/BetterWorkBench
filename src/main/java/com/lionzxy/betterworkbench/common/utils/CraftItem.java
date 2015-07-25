@@ -8,15 +8,22 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class CraftItem {
     public ItemStack itemStack;
-    public OreDictionary oreDictionary;
-    public boolean dictionary;
-    CraftItem(OreDictionary oreDictionary){
+    public String oreDictionary;
+    CraftItem(String oreDictionary){
        this.oreDictionary=oreDictionary;
-       this.dictionary=true;
     }
     CraftItem(ItemStack itemStack){
         this.itemStack=itemStack;
-        this.dictionary=false;
+    }
+    boolean check(ItemStack inItemStack){
+        if(itemStack!=null){
+            return inItemStack==itemStack;
+        }else{
+            for(int i=0;i<OreDictionary.getOres(oreDictionary).size();i++){
+                if(OreDictionary.getOres(oreDictionary).get(i)==inItemStack){return true;}
+            }
+            return false;
+        }
     }
 
 }
