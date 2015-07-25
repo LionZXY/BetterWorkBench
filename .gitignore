@@ -6,3 +6,11 @@ bin/
 build/
 eclipse/
 gradle/
+
+config/
+logs/
+mods/
+resourcepacks/
+saves/
+options.txt
+usernamecache.json
