@@ -1,4 +1,4 @@
-package com.lionzxy.betterworkbench.common;
+package com.lionzxy.betterworkbench.common.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 
 import com.lionzxy.betterworkbench.BetterWorkbenchVersion;
 
-public class BlockWorkbench extends BlockContainer {
+public class SimpleWorkbenchBlock extends BlockContainer {
 
-    public BlockWorkbench() {
+    public SimpleWorkbenchBlock() {
         super(Material.wood);
         this.setBlockName(BetterWorkbenchVersion.MODID + ".workbench.simple");
         this.setHardness(2.0F);

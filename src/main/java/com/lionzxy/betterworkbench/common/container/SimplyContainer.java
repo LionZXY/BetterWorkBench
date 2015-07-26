@@ -10,7 +10,7 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.lionzxy.betterworkbench.BetterWorkbench;
+import com.lionzxy.betterworkbench.common.Blocks;
 import com.lionzxy.betterworkbench.common.inventory.SimplyInventory;
 import com.lionzxy.betterworkbench.common.listcraft.VanillaCraft;
 
@@ -117,7 +117,7 @@ public class SimplyContainer extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer p_75145_1_) {
 
-        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != BetterWorkbench.sBlockWorkbench ? false : p_75145_1_.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
+        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != Blocks.mSimpleWorkbench ? false : p_75145_1_.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
     }
     public void onCraftMatrixChanged(IInventory p_75130_1_)
     {
