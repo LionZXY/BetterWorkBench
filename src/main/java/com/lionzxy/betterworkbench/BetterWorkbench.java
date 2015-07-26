@@ -1,5 +1,6 @@
 package com.lionzxy.betterworkbench;
 
+import com.lionzxy.betterworkbench.common.BlockWorkbench;
 import com.lionzxy.betterworkbench.proxy.ProxyCommon;
 
 import cpw.mods.fml.common.Mod;
@@ -13,6 +14,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = BetterWorkbenchVersion.MODID, name = BetterWorkbenchVersion.NAME, version = BetterWorkbenchVersion.VERSION)
 public class BetterWorkbench {
 
+	// Так как блок один, его можно запихнуть прямо сюда
+	public static final BlockWorkbench sBlockWorkbench = new BlockWorkbench();
+	
+	
+	
     @SidedProxy(clientSide = "com.lionzxy.betterworkbench.proxy.ProxyClient", serverSide = "com.lionzxy.betterworkbench.proxy.ProxyServer")
     public static ProxyCommon proxy;
 
