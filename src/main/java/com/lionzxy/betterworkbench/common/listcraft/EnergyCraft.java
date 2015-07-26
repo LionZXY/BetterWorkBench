@@ -19,8 +19,14 @@ public class EnergyCraft {
     }
     public static ItemStack checkToCraft(ItemStack[] craftMatrix){
         for(int i =0;i<listCraft.size();i++){
-            listCraft.get(i).check(craftMatrix);
+            if(listCraft.get(i) != null)listCraft.get(i).check(craftMatrix);
         }
         return null;
+    }
+    public static void removeRecipe(ItemStack output){
+        for(int i = 0; i < listCraft.size(); i++){
+            if(listCraft.get(i).getCraftOutput()==output)listCraft.remove(i);
+
+        }
     }
 }

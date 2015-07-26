@@ -19,6 +19,7 @@ public class SimpleWorkbenchRecipe implements IRecipe {
 	 *  тк можно использовать нативный форджевый IRecipe. Если
 	 *  всё-таки понадобится собственный, то исправь.
 	 */
+	//Нет. Всё норм.
 	
     @Override
     public int getRecipeSize() {
