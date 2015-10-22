@@ -185,4 +185,33 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
+  <component name="libraryTable">
+    <library name="CodeChickenCore-1.7.10-1.0.7.47-dev">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/libs/CodeChickenCore-1.7.10-1.0.7.47-dev.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/libs/CodeChickenCore-1.7.10-1.0.7.47-src.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="CodeChickenLib-1.7.10-1.1.3.140-dev">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/libs/CodeChickenLib-1.7.10-1.1.3.140-dev.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/libs/CodeChickenLib-1.7.10-1.1.3.140-src.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="NotEnoughItems-1.7.10-1.0.5.118-dev">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/libs/NotEnoughItems-1.7.10-1.0.5.118-dev.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/libs/NotEnoughItems-1.7.10-1.0.5.118-src.jar!/" />
+      </SOURCES>
+    </library>
+  </component>
 </project>
