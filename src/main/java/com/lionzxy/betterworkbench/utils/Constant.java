@@ -1,4 +1,4 @@
-package com.lionzxy.betterworkbench.client.utils;
+package com.lionzxy.betterworkbench.utils;
 
 /**
  * Created by LionZXY on 22.10.2015.

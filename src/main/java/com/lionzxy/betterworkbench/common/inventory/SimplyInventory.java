@@ -1,6 +1,6 @@
-package com.lionzxy.betterworkbench.client.inventory;
+package com.lionzxy.betterworkbench.common.inventory;
 
-import com.lionzxy.betterworkbench.client.inventory.base.WorkBenchInventory;
+import com.lionzxy.betterworkbench.common.inventory.base.WorkBenchInventory;
 import net.minecraft.item.ItemStack;
 
 /**

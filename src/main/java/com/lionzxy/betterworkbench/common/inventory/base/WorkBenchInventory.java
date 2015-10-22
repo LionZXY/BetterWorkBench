@@ -1,11 +1,10 @@
-package com.lionzxy.betterworkbench.client.inventory.base;
+package com.lionzxy.betterworkbench.common.inventory.base;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import scala.reflect.api.Constants;
 
 /**
  * Created by LionZXY on 22.10.2015.

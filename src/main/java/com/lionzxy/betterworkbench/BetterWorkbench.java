@@ -1,6 +1,6 @@
-package com.lionzxy.betterworkbench.client;
+package com.lionzxy.betterworkbench;
 
-import com.lionzxy.betterworkbench.client.utils.Constant;
+import com.lionzxy.betterworkbench.utils.Constant;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
