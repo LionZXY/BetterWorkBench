@@ -1,6 +1,7 @@
 package com.lionzxy.betterworkbench.common.inventory;
 
 import com.lionzxy.betterworkbench.common.inventory.base.WorkBenchInventory;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -9,8 +10,9 @@ import net.minecraft.item.ItemStack;
  */
 public class SimplyInventory extends WorkBenchInventory {
 
-    public SimplyInventory(ItemStack itemStack) {
-        super(itemStack);
+
+    public SimplyInventory(ItemStack itemStack, EntityPlayer player) {
+        super(itemStack, player);
     }
 
     @Override
@@ -21,5 +23,11 @@ public class SimplyInventory extends WorkBenchInventory {
     @Override
     public String getInventoryName() {
         return "Simply Workbench";
+    }
+
+    @Override
+    public boolean checkToCraft() {
+        //TODO
+        return false;
     }
 }

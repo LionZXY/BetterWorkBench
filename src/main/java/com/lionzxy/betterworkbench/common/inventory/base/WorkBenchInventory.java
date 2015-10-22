@@ -17,11 +17,14 @@ public abstract class WorkBenchInventory implements IInventory {
     public ItemStack items[];
 
     private ItemStack mainItemStack;
+    //Используется для крафта
+    private EntityPlayer player;
 
 
-    public WorkBenchInventory(ItemStack itemStack) {
+    public WorkBenchInventory(ItemStack itemStack, EntityPlayer player) {
 
         this.mainItemStack = itemStack;
+        this.player = player;
 
         if (!mainItemStack.hasTagCompound())
             mainItemStack.setTagCompound(new NBTTagCompound());
@@ -95,7 +98,9 @@ public abstract class WorkBenchInventory implements IInventory {
             if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0)
                 items[i] = null;
         }
-        //TODO
+        //Проверка на крафт
+        checkToCraft();
+
         writeToNBT(mainItemStack.getTagCompound());
     }
 
@@ -165,4 +170,6 @@ public abstract class WorkBenchInventory implements IInventory {
         }
 
     }
+
+    public abstract boolean checkToCraft();
 }
