@@ -130,6 +130,7 @@ public abstract class WorkBenchInventory implements IInventory {
     }
 
     public void writeToNBT(NBTTagCompound tagCompound) {
+        //TODO
         //Вся информация будет храниться в одном листе для упрощения переброски тегов между блоком-игроком-предметом
         NBTTagList tagList = new NBTTagList();
         NBTTagCompound tagCompound1 = new NBTTagCompound();
@@ -152,6 +153,7 @@ public abstract class WorkBenchInventory implements IInventory {
     }
 
     public void readToNBT(NBTTagCompound tagCompound) {
+        //TODO
         //Выдергиваем лист.
         NBTTagList itemsList = tagCompound.getTagList("WorkBench", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND)
                 //Предпологается, что Items всегда на первом месте
@@ -172,4 +174,12 @@ public abstract class WorkBenchInventory implements IInventory {
     }
 
     public abstract boolean checkToCraft();
+
+    public ItemStack getMainItemStack() {
+        return mainItemStack;
+    }
+
+    public EntityPlayer getPlayer() {
+        return player;
+    }
 }

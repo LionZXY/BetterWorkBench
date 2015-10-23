@@ -17,7 +17,7 @@ public class SimplyInventory extends WorkBenchInventory {
 
     @Override
     public int getSizeInventory() {
-        return 9;
+        return 10;
     }
 
     @Override

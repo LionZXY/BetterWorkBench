@@ -1,7 +1,10 @@
 package com.lionzxy.betterworkbench;
 
+import com.lionzxy.betterworkbench.client.ClientInit;
+import com.lionzxy.betterworkbench.common.Init;
 import com.lionzxy.betterworkbench.utils.Constant;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 /**
@@ -13,10 +16,20 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class BetterWorkbench {
 
     @Mod.Instance
-    public static BetterWorkbench instance = new BetterWorkbench();
+    private static BetterWorkbench instance = new BetterWorkbench();
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event){
+    public void preInit(FMLPreInitializationEvent event) {
 
+        Init.init();
+        ClientInit.init();
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+    }
+
+    public static BetterWorkbench getInstance() {
+        return instance;
     }
 }
