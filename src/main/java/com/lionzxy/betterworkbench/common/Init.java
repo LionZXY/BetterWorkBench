@@ -1,5 +1,6 @@
 package com.lionzxy.betterworkbench.common;
 
+import com.lionzxy.betterworkbench.common.block.BlockInit;
 import com.lionzxy.betterworkbench.common.item.ItemInit;
 
 /**
@@ -8,11 +9,8 @@ import com.lionzxy.betterworkbench.common.item.ItemInit;
  */
 public class Init {
 
-    public static boolean init() {
-
-        if (!ItemInit.init())
-            return false;
-
-        return true;
+    public static void init() {
+        BlockInit.init();
+        ItemInit.init();
     }
 }
