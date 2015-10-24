@@ -11,7 +11,7 @@ import net.minecraft.block.Block;
 public class ItemSimplyWorkBench extends BaseItem {
 
     /*
-     *@guiId по идее всегда должен быть равен единице
+     *@guiId РїРѕ РёРґРµРµ РІСЃРµРіРґР° РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СЂР°РІРµРЅ РµРґРёРЅРёС†Рµ
      */
     public ItemSimplyWorkBench(int guiId, Block block) {
         super("simplyworkbench", guiId, block);

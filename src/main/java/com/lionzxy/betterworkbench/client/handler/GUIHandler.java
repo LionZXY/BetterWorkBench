@@ -19,7 +19,7 @@ public class GUIHandler implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        //Возвращает контейнер
+        //Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕРЅС‚РµР№РЅРµСЂ
         switch (ID) {
             case 1:
                 if (!world.blockExists(x, y, z)) {
@@ -36,7 +36,7 @@ public class GUIHandler implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        //Возвращает гуишку
+        //Р’РѕР·РІСЂР°С‰Р°РµС‚ РіСѓРёС€РєСѓ
         switch (ID) {
             case 1:
                 if (!world.blockExists(x, y, z)) {
