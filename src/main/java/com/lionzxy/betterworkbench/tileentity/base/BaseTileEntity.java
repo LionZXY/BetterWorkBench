@@ -1,33 +1,24 @@
-package com.lionzxy.betterworkbench.common.inventory.base;
+package com.lionzxy.betterworkbench.tileentity.base;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 
 /**
- * Created by LionZXY on 22.10.2015.
+ * Created by LionZXY on 24.10.2015.
  * BetterWorkbench
  */
-public abstract class WorkBenchInventory implements IInventory {
-
+public abstract class BaseTileEntity extends TileEntity implements IInventory {
     int craftSlot;
 
     public ItemStack[] inventory = new ItemStack[10];
-    //Используется для крафта
-    private EntityPlayer player;
 
 
-    public WorkBenchInventory(EntityPlayer player) {
-
-        this.player = player;
-
-        if (!player.inventory.getCurrentItem().hasTagCompound())
-            player.inventory.getCurrentItem().setTagCompound(new NBTTagCompound());
-
-        this.readToNBT(player.inventory.getCurrentItem().getTagCompound());
-
+    public BaseTileEntity() {
+        super();
         //this.inventory = new ItemStack[getSizeInventory()];
     }
 
@@ -98,8 +89,6 @@ public abstract class WorkBenchInventory implements IInventory {
         }
         //Проверка на крафт
         checkToCraft();
-
-        writeToNBT(player.inventory.getCurrentItem().getTagCompound());
     }
 
     @Override
@@ -110,15 +99,11 @@ public abstract class WorkBenchInventory implements IInventory {
     @Override
     public void openInventory() {
         //На открытие инвентаря вытаскиваем всё
-        readToNBT(player.inventory.getCurrentItem().getTagCompound());
     }
-
     @Override
     public void closeInventory() {
-        //На закрытие инвентаря сохраняем всё
-        writeToNBT(player.inventory.getCurrentItem().getTagCompound());
+        //На закрытие инвентаря сохраняем всё}
     }
-
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
         //Если это слот выхода рецепта, то нельзя ставить
@@ -128,7 +113,7 @@ public abstract class WorkBenchInventory implements IInventory {
     }
 
     public void writeToNBT(NBTTagCompound tagCompound) {
-
+        super.writeToNBT(tagCompound);
         //Вся информация будет храниться в одном листе для упрощения переброски тегов между блоком-игроком-предметом
         NBTTagList tagList = new NBTTagList();
         NBTTagCompound tagCompound1 = new NBTTagCompound();
@@ -151,6 +136,7 @@ public abstract class WorkBenchInventory implements IInventory {
     }
 
     public void readToNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
         //Выдергиваем лист.
         NBTTagList itemsList = tagCompound.getTagList("WorkBench", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND)
                 //Предпологается, что Items всегда на первом месте
@@ -170,12 +156,4 @@ public abstract class WorkBenchInventory implements IInventory {
     }
 
     public abstract boolean checkToCraft();
-
-    public ItemStack getMainItemStack() {
-        return player.inventory.getCurrentItem();
-    }
-
-    public EntityPlayer getPlayer() {
-        return player;
-    }
 }

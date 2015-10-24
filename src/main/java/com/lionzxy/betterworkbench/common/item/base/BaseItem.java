@@ -75,6 +75,6 @@ public abstract class BaseItem extends Item{
     	if(world.isAirBlock(x, y, z)){
     		world.setBlock(x, y, z, block);
     		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, block.stepSound.func_150496_b(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
-    	}
+        }
     }
 }

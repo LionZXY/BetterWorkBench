@@ -1,28 +1,30 @@
 package com.lionzxy.betterworkbench.common.container.base;
 
 import com.lionzxy.betterworkbench.common.inventory.base.WorkBenchInventory;
+import ibxm.Player;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Created by LionZXY on 23.10.2015. BetterWorkbench
  */
 public abstract class BaseContainer extends Container {
-	public final WorkBenchInventory inventory;
+	public final IInventory inventory;
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
 
-	public BaseContainer(WorkBenchInventory inventory) {
+	public BaseContainer(IInventory inventory, EntityPlayer player) {
 		super();
 		this.inventory = inventory;
 
-		this.addSlotToContainer(new SlotCrafting(inventory.getPlayer(), craftMatrix, inventory, 9, 124, 35));
+		this.addSlotToContainer(new SlotCrafting(player, craftMatrix, inventory, 9, 124, 35));
 
 		addCraftingGrid(craftMatrix, 0, 30, 17, 3, 3);
 
-		addPlayerInventory(inventory.getPlayer().inventory);
+		addPlayerInventory(player.inventory);
 
 	}
 
@@ -73,9 +75,12 @@ public abstract class BaseContainer extends Container {
 	}
 
 	public void onCraftMatrixChanged(IInventory inv) {
+		if(inventory instanceof TileEntity)
 		inventory.setInventorySlotContents(9,
-				CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, inventory.getPlayer().worldObj));
-		inventory.markDirty();
+				CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, ((TileEntity)inventory).getWorldObj()));
+		else if(inventory instanceof WorkBenchInventory)
+			inventory.setInventorySlotContents(9,
+					CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, ((WorkBenchInventory)inventory).getPlayer().worldObj));
 		updateTile();
 	}
 

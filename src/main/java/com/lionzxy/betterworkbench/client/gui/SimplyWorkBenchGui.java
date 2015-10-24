@@ -5,6 +5,7 @@ import com.lionzxy.betterworkbench.common.container.SimplyContainer;
 import com.lionzxy.betterworkbench.common.inventory.base.WorkBenchInventory;
 import com.lionzxy.betterworkbench.utils.Constant;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -20,8 +21,8 @@ public class SimplyWorkBenchGui extends GuiContainer {
 
     protected ResourceLocation background = new ResourceLocation(Constant.MODID, "textures/gui/crafting_table.png");
 
-    public SimplyWorkBenchGui(WorkBenchInventory workBenchInventory) {
-        super(new SimplyContainer(workBenchInventory));
+    public SimplyWorkBenchGui(IInventory workBenchInventory, EntityPlayer player) {
+        super(new SimplyContainer(workBenchInventory, player));
     }
 
 
