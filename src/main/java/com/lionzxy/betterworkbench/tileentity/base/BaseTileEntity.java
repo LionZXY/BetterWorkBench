@@ -34,11 +34,11 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     @Override
     public ItemStack decrStackSize(int slot, int amount) {
-        //Когда игрок берет предмет
+        //РљРѕРіРґР° РёРіСЂРѕРє Р±РµСЂРµС‚ РїСЂРµРґРјРµС‚
         ItemStack stack = getStackInSlot(slot);
-        //Если что-то есть, то сносим нафиг
+        //Р•СЃР»Рё С‡С‚Рѕ-С‚Рѕ РµСЃС‚СЊ, С‚Рѕ СЃРЅРѕСЃРёРј РЅР°С„РёРі
         if (stack != null) {
-            //Чисто теоритически наврядли, но условие стоит. Пусть будет.
+            //Р§РёСЃС‚Рѕ С‚РµРѕСЂРёС‚РёС‡РµСЃРєРё РЅР°РІСЂСЏРґР»Рё, РЅРѕ СѓСЃР»РѕРІРёРµ СЃС‚РѕРёС‚. РџСѓСЃС‚СЊ Р±СѓРґРµС‚.
             if (stack.stackSize > amount) {
                 stack = stack.splitStack(amount);
                 markDirty();
@@ -58,7 +58,7 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
 
         this.inventory[slot] = itemStack;
-        //Проверка на адекватность блока
+        //РџСЂРѕРІРµСЂРєР° РЅР° Р°РґРµРєРІР°С‚РЅРѕСЃС‚СЊ Р±Р»РѕРєР°
         if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
             itemStack.stackSize = this.getInventoryStackLimit();
         }
@@ -82,12 +82,12 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     @Override
     public void markDirty() {
-        //Вызывается при любом изменении инвентаря. В будущем будет проверка на крафт
+        //Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё Р»СЋР±РѕРј РёР·РјРµРЅРµРЅРёРё РёРЅРІРµРЅС‚Р°СЂСЏ. Р’ Р±СѓРґСѓС‰РµРј Р±СѓРґРµС‚ РїСЂРѕРІРµСЂРєР° РЅР° РєСЂР°С„С‚
         for (int i = 0; i < getSizeInventory(); i++) {
             if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0)
                 inventory[i] = null;
         }
-        //Проверка на крафт
+        //РџСЂРѕРІРµСЂРєР° РЅР° РєСЂР°С„С‚
         checkToCraft();
     }
 
@@ -98,15 +98,15 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     @Override
     public void openInventory() {
-        //На открытие инвентаря вытаскиваем всё
+        //РќР° РѕС‚РєСЂС‹С‚РёРµ РёРЅРІРµРЅС‚Р°СЂСЏ РІС‹С‚Р°СЃРєРёРІР°РµРј РІСЃС‘
     }
     @Override
     public void closeInventory() {
-        //На закрытие инвентаря сохраняем всё}
+        //РќР° Р·Р°РєСЂС‹С‚РёРµ РёРЅРІРµРЅС‚Р°СЂСЏ СЃРѕС…СЂР°РЅСЏРµРј РІСЃС‘}
     }
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        //Если это слот выхода рецепта, то нельзя ставить
+        //Р•СЃР»Рё СЌС‚Рѕ СЃР»РѕС‚ РІС‹С…РѕРґР° СЂРµС†РµРїС‚Р°, С‚Рѕ РЅРµР»СЊР·СЏ СЃС‚Р°РІРёС‚СЊ
         if (slot != craftSlot)
             return true;
         else return false;
@@ -114,17 +114,17 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
-        //Вся информация будет храниться в одном листе для упрощения переброски тегов между блоком-игроком-предметом
+        //Р’СЃСЏ РёРЅС„РѕСЂРјР°С†РёСЏ Р±СѓРґРµС‚ С…СЂР°РЅРёС‚СЊСЃСЏ РІ РѕРґРЅРѕРј Р»РёСЃС‚Рµ РґР»СЏ СѓРїСЂРѕС‰РµРЅРёСЏ РїРµСЂРµР±СЂРѕСЃРєРё С‚РµРіРѕРІ РјРµР¶РґСѓ Р±Р»РѕРєРѕРј-РёРіСЂРѕРєРѕРј-РїСЂРµРґРјРµС‚РѕРј
         NBTTagList tagList = new NBTTagList();
         NBTTagCompound tagCompound1 = new NBTTagCompound();
-        //Предметы в отдельном листе
+        //РџСЂРµРґРјРµС‚С‹ РІ РѕС‚РґРµР»СЊРЅРѕРј Р»РёСЃС‚Рµ
         NBTTagList itemsList = new NBTTagList();
-        //Каждый слог это свой тег. В нем содержиться itemstack и номер слота.
+        //РљР°Р¶РґС‹Р№ СЃР»РѕРі СЌС‚Рѕ СЃРІРѕР№ С‚РµРі. Р’ РЅРµРј СЃРѕРґРµСЂР¶РёС‚СЊСЃСЏ itemstack Рё РЅРѕРјРµСЂ СЃР»РѕС‚Р°.
         NBTTagCompound slotTag = new NBTTagCompound();
-        //Цикл записи всех предметов в NBT
+        //Р¦РёРєР» Р·Р°РїРёСЃРё РІСЃРµС… РїСЂРµРґРјРµС‚РѕРІ РІ NBT
         for (byte i = 0; i < getSizeInventory(); i++) {
             if (inventory[i] != null) {
-                //Один байт лучше четырех
+                //РћРґРёРЅ Р±Р°Р№С‚ Р»СѓС‡С€Рµ С‡РµС‚С‹СЂРµС…
                 slotTag.setByte("Slot", i);
                 inventory[i].writeToNBT(slotTag);
                 itemsList.appendTag(slotTag);
@@ -137,16 +137,16 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     public void readToNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
-        //Выдергиваем лист.
+        //Р’С‹РґРµСЂРіРёРІР°РµРј Р»РёСЃС‚.
         NBTTagList itemsList = tagCompound.getTagList("WorkBench", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND)
-                //Предпологается, что Items всегда на первом месте
+                //РџСЂРµРґРїРѕР»РѕРіР°РµС‚СЃСЏ, С‡С‚Рѕ Items РІСЃРµРіРґР° РЅР° РїРµСЂРІРѕРј РјРµСЃС‚Рµ
                 .getCompoundTagAt(0).getTagList("Items", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND);
-        //Цикл записи всех предметов в NBT
+        //Р¦РёРєР» Р·Р°РїРёСЃРё РІСЃРµС… РїСЂРµРґРјРµС‚РѕРІ РІ NBT
         for (byte i = 0; i < itemsList.tagCount(); i++) {
-            //Каждый слог это свой тег. В нем содержиться itemstack и номер слота.
+            //РљР°Р¶РґС‹Р№ СЃР»РѕРі СЌС‚Рѕ СЃРІРѕР№ С‚РµРі. Р’ РЅРµРј СЃРѕРґРµСЂР¶РёС‚СЊСЃСЏ itemstack Рё РЅРѕРјРµСЂ СЃР»РѕС‚Р°.
             NBTTagCompound item = itemsList.getCompoundTagAt(i);
             byte slot = item.getByte("Slot");
-            // Двойная проверка на адекватность слота
+            // Р”РІРѕР№РЅР°СЏ РїСЂРѕРІРµСЂРєР° РЅР° Р°РґРµРєРІР°С‚РЅРѕСЃС‚СЊ СЃР»РѕС‚Р°
             if (slot >= 0 && slot < getSizeInventory()) {
                 inventory[slot] = ItemStack.loadItemStackFromNBT(item);
                 System.out.println(inventory[slot].getDisplayName());

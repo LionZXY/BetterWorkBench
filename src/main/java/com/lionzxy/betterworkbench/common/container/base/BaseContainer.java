@@ -60,7 +60,7 @@ public abstract class BaseContainer extends Container {
 	}
 
 	/**
-	 * Вызывается по шифт-клику на слот
+	 * Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїРѕ С€РёС„С‚-РєР»РёРєСѓ РЅР° СЃР»РѕС‚
 	 */
 	public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_) {
 		// TODO
@@ -81,7 +81,7 @@ public abstract class BaseContainer extends Container {
 		else if(inventory instanceof WorkBenchInventory)
 			inventory.setInventorySlotContents(9,
 					CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, ((WorkBenchInventory)inventory).getPlayer().worldObj));
-		updateTile();
+
 	}
 
 	protected void updateTile() {

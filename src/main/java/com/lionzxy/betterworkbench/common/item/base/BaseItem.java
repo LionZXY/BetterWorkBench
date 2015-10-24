@@ -41,11 +41,11 @@ public abstract class BaseItem extends Item{
     }
 
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-    	//Чтоб открывался только на клиентской стороне, как я понял
+    	//Р§С‚РѕР± РѕС‚РєСЂС‹РІР°Р»СЃСЏ С‚РѕР»СЊРєРѕ РЅР° РєР»РёРµРЅС‚СЃРєРѕР№ СЃС‚РѕСЂРѕРЅРµ, РєР°Рє СЏ РїРѕРЅСЏР»
     	
     	if (world.isRemote || player.isSneaking())
         	return itemStack;
-        //Основной код открытия гуи
+        //РћСЃРЅРѕРІРЅРѕР№ РєРѕРґ РѕС‚РєСЂС‹С‚РёСЏ РіСѓРё
         player.openGui(BetterWorkbench.getInstance(), GUI_ID, world, (int) player.posX, (int) player.posY, (int) player.posZ);
         return itemStack;
     }

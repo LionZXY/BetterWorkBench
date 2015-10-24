@@ -14,6 +14,6 @@ public class ItemInit {
 
     public static void init() {
         //GUI ID: 1
-        simplyWorkBench = new ItemSimplyWorkBench(GUIHandler.SIMPLY_WORKBENCH, BlockInit.simplyWorkBench);
+        simplyWorkBench = new ItemSimplyWorkBench(GUIHandler.SIMPLY_WORKBENCH_ITEM, BlockInit.simplyWorkBench);
     }
 }

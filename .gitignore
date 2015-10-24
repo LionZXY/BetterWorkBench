@@ -1,16 +1,14 @@
-.classpath
-.project
-.gradle/
-.settings/
-bin/
-build/
-eclipse/
-gradle/
+!.gitignore
 
-config/
-logs/
-mods/
-resourcepacks/
-saves/
-options.txt
-usernamecache.json
+# eclipse
+/eclipse
+
+# idea
+.idea
+*.iml
+
+# gradle
+build
+.gradle
+
+*.DS_Store
