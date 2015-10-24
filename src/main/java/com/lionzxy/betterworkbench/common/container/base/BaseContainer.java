@@ -81,7 +81,7 @@ public abstract class BaseContainer extends Container {
 		else if(inventory instanceof WorkBenchInventory)
 			inventory.setInventorySlotContents(9,
 					CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, ((WorkBenchInventory)inventory).getPlayer().worldObj));
-		updateTile();
+
 	}
 
 	protected void updateTile() {

@@ -16,18 +16,22 @@ import net.minecraft.world.World;
 public class GUIHandler implements IGuiHandler {
 
     public static final int SIMPLY_WORKBENCH = 1;
+    public static final int SIMPLY_WORKBENCH_ITEM = 2;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         //Возвращает контейнер
         switch (ID) {
-            case 1:
+            case SIMPLY_WORKBENCH:
                 if (!world.blockExists(x, y, z)) {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
-                    return new SimplyContainer(new SimplyTileEntity(), player);
-                } else return new SimplyContainer(new SimplyInventory(player.getCurrentEquippedItem(), player), player);
+                    return new SimplyContainer((BaseTileEntity) world.getTileEntity(x, y, z), player);
+                }
+                return null;
+            case SIMPLY_WORKBENCH_ITEM:
+                return new SimplyContainer(new SimplyInventory(player.getCurrentEquippedItem(), player), player);
             default:
                 return null;
         }
@@ -38,13 +42,16 @@ public class GUIHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         //Возвращает гуишку
         switch (ID) {
-            case 1:
+            case SIMPLY_WORKBENCH:
                 if (!world.blockExists(x, y, z)) {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
-                    return new SimplyWorkBenchGui(new SimplyTileEntity(),player);
-                } else return new SimplyWorkBenchGui(new SimplyInventory(player.getCurrentEquippedItem(), player), player);
+                    return new SimplyWorkBenchGui((BaseTileEntity) world.getTileEntity(x, y, z),player);
+                }
+                return null;
+            case SIMPLY_WORKBENCH_ITEM:
+                return new SimplyWorkBenchGui(new SimplyInventory(player.getCurrentEquippedItem(), player), player);
             default:
                 return null;
         }
