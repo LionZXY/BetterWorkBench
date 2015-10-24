@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 
 /**
  * Created by LionZXY on 23.10.2015. BetterWorkbench
@@ -52,6 +53,8 @@ public abstract class BaseContainer extends Container {
 				this.addSlotToContainer(new Slot(inventory, startSlot + i++, x + (w * 18), y + (h * 18)));
 			}
 		}
+
+
 	}
 
 	/**
@@ -68,4 +71,18 @@ public abstract class BaseContainer extends Container {
 		super.onContainerClosed(player);
 		inventory.closeInventory();
 	}
+
+	public void onCraftMatrixChanged(IInventory inv) {
+		inventory.setInventorySlotContents(9,
+				CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, inventory.getPlayer().worldObj));
+		inventory.markDirty();
+		updateTile();
+	}
+
+	protected void updateTile() {
+		for (int i = 0; i<9; i++) {
+			inventory.setInventorySlotContents(i, craftMatrix.getStackInSlot(i));
+		}
+	}
+
 }

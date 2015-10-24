@@ -11,8 +11,9 @@ import net.minecraft.item.ItemStack;
 public class SimplyInventory extends WorkBenchInventory {
 
 
+
     public SimplyInventory(ItemStack itemStack, EntityPlayer player) {
-        super(itemStack, player);
+        super(player);
     }
 
     @Override
@@ -30,4 +31,5 @@ public class SimplyInventory extends WorkBenchInventory {
         //TODO
         return false;
     }
+
 }
