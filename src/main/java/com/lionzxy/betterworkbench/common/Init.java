@@ -14,9 +14,10 @@ public class Init {
     public static void init() {
         BlockInit.init();
         ItemInit.init();
+        registerTEs();
     }
 
-    public static void register(){
-        GameRegistry.registerTileEntity(SimplyTileEntity.class,"simplytileentity");
+    public static void registerTEs(){
+        GameRegistry.registerTileEntity(SimplyTileEntity.class, "simplytileentity");
     }
 }

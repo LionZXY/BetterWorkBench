@@ -7,6 +7,7 @@ import com.lionzxy.betterworkbench.tileentity.SimplyTileEntity;
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**
@@ -27,6 +28,7 @@ public class GUIHandler implements IGuiHandler {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
+                	SimplyTileEntity ent = (SimplyTileEntity) world.getTileEntity(x, y, z);
                     return new SimplyContainer((BaseTileEntity) world.getTileEntity(x, y, z), player);
                 }
                 return null;
@@ -47,6 +49,7 @@ public class GUIHandler implements IGuiHandler {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
+                	TileEntity ent = world.getTileEntity(x, y, z);
                     return new SimplyWorkBenchGui((BaseTileEntity) world.getTileEntity(x, y, z),player);
                 }
                 return null;

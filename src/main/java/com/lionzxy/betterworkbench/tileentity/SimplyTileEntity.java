@@ -26,4 +26,12 @@ public class SimplyTileEntity extends BaseTileEntity {
     public boolean checkToCraft() {
         return true;
     }
+
+	@Override
+	public void openInventory() {	
+	}
+
+	@Override
+	public void closeInventory() {	
+	}
 }

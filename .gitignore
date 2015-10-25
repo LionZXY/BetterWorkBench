@@ -2,6 +2,7 @@
 
 # eclipse
 /eclipse
+/bin/*
 
 # idea
 .idea
