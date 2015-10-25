@@ -28,7 +28,6 @@ public class GUIHandler implements IGuiHandler {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
-                	SimplyTileEntity ent = (SimplyTileEntity) world.getTileEntity(x, y, z);
                     return new SimplyContainer((BaseTileEntity) world.getTileEntity(x, y, z), player);
                 }
                 return null;
@@ -49,7 +48,6 @@ public class GUIHandler implements IGuiHandler {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
-                	TileEntity ent = world.getTileEntity(x, y, z);
                     return new SimplyWorkBenchGui((BaseTileEntity) world.getTileEntity(x, y, z),player);
                 }
                 return null;
