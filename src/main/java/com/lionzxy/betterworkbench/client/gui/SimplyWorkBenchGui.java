@@ -13,6 +13,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -26,8 +27,8 @@ public class SimplyWorkBenchGui extends GuiContainer {
 
     protected ResourceLocation background = new ResourceLocation(Constant.MODID, "textures/gui/crafting_table.png");
 
-    public SimplyWorkBenchGui(IInventory workBenchInventory, EntityPlayer player) {
-        super(new SimplyContainer(workBenchInventory, player));
+    public SimplyWorkBenchGui(IInventory workBenchInventory, EntityPlayer player, ItemStack[] itemList) {
+        super(new SimplyContainer(workBenchInventory, player, itemList));
     }
 
 

@@ -65,7 +65,6 @@ public abstract class WorkBenchInventory implements IInventory {
            		itemStack.stackSize = this.getInventoryStackLimit();
         	}
     	}
-
         markDirty();
     }
 

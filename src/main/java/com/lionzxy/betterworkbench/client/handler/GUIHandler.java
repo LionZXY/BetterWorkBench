@@ -28,11 +28,11 @@ public class GUIHandler implements IGuiHandler {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
-                    return new SimplyContainer((BaseTileEntity) world.getTileEntity(x, y, z), player);
+                    return new SimplyContainer((BaseTileEntity) world.getTileEntity(x, y, z), player, ((BaseTileEntity) world.getTileEntity(x, y, z)).inventory);
                 }
                 return null;
             case SIMPLY_WORKBENCH_ITEM:
-                return new SimplyContainer(new SimplyInventory(player.getCurrentEquippedItem(), player), player);
+                return new SimplyContainer(new SimplyInventory(player.getCurrentEquippedItem(), player), player, (new SimplyInventory(player.getCurrentEquippedItem(), player)).inventory);
             default:
                 return null;
         }
@@ -48,11 +48,11 @@ public class GUIHandler implements IGuiHandler {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
-                    return new SimplyWorkBenchGui((BaseTileEntity) world.getTileEntity(x, y, z), player);
+                    return new SimplyWorkBenchGui((BaseTileEntity) world.getTileEntity(x, y, z), player, ((BaseTileEntity) world.getTileEntity(x, y, z)).inventory);
                 }
                 return null;
             case SIMPLY_WORKBENCH_ITEM:
-                return new SimplyWorkBenchGui(new SimplyInventory(player.getCurrentEquippedItem(), player), player);
+                return new SimplyWorkBenchGui(new SimplyInventory(player.getCurrentEquippedItem(), player), player, (new SimplyInventory(player.getCurrentEquippedItem(), player)).inventory);
             default:
                 return null;
         }
