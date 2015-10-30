@@ -11,12 +11,8 @@ import net.minecraft.nbt.NBTTagList;
  * BetterWorkbench
  */
 public abstract class WorkBenchInventory implements IInventory {
-
-    int craftSlot;
-
     public ItemStack[] inventory = new ItemStack[10];
     private EntityPlayer player;
-
 
     public WorkBenchInventory(EntityPlayer player) {
 
@@ -25,16 +21,21 @@ public abstract class WorkBenchInventory implements IInventory {
         if (!player.inventory.getCurrentItem().hasTagCompound())
             player.inventory.getCurrentItem().setTagCompound(new NBTTagCompound());
 
-        this.readToNBT(player.inventory.getCurrentItem().getTagCompound());
+        this.readFromNBT(player.inventory.getCurrentItem().getTagCompound());
 
     }
 
     @Override
-    public abstract int getSizeInventory();
+    public int getSizeInventory(){
+    	return 10;
+    }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-        return inventory[slot];
+    	if(slot < getSizeInventory())
+    		return inventory[slot];
+    	else 
+    		return (ItemStack)null;
     }
 
     @Override
@@ -58,15 +59,15 @@ public abstract class WorkBenchInventory implements IInventory {
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
-
-        this.inventory[slot] = itemStack;
-        if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
-            itemStack.stackSize = this.getInventoryStackLimit();
-        }
+    	if(slot < getSizeInventory()){
+    		inventory[slot] = itemStack;
+        	if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
+           		itemStack.stackSize = this.getInventoryStackLimit();
+        	}
+    	}
 
         markDirty();
     }
-
 
     @Override
     public abstract String getInventoryName();
@@ -78,7 +79,7 @@ public abstract class WorkBenchInventory implements IInventory {
 
     @Override
     public int getInventoryStackLimit() {
-        return 1024;
+        return 64;
     }
 
     @Override
@@ -99,51 +100,44 @@ public abstract class WorkBenchInventory implements IInventory {
 
     @Override
     public void openInventory() {
-        readToNBT(player.inventory.getCurrentItem().getTagCompound());
+        readFromNBT(player.inventory.getCurrentItem().getTagCompound());
     }
 
     @Override
     public void closeInventory() {
         writeToNBT(player.inventory.getCurrentItem().getTagCompound());
     }
-
+    
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        if (slot != craftSlot)
-            return true;
-        else return false;
+    	return true;
     }
 
     public void writeToNBT(NBTTagCompound tagCompound) {
-
-        NBTTagList tagList = new NBTTagList();
-        NBTTagCompound tagCompound1 = new NBTTagCompound();
         NBTTagList itemsList = new NBTTagList();
-        NBTTagCompound slotTag = new NBTTagCompound();
+
         for (byte i = 0; i < getSizeInventory(); i++) {
-            if (inventory[i] != null) {
+            if (inventory != null) {
+            	NBTTagCompound slotTag = new NBTTagCompound();
                 slotTag.setByte("Slot", i);
-                inventory[i].writeToNBT(slotTag);
+                if(this.inventory[i] != null)
+                	this.inventory[i].writeToNBT(slotTag);
                 itemsList.appendTag(slotTag);
             }
         }
-        tagCompound1.setTag("Items", itemsList);
-        tagList.appendTag(tagCompound1);
-        tagCompound.setTag("WorkBench", tagList);
+        tagCompound.setTag("Items", itemsList);
     }
 
-    public void readToNBT(NBTTagCompound tagCompound) {
-        NBTTagList itemsList = tagCompound.getTagList("WorkBench", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND)
-                .getCompoundTagAt(0).getTagList("Items", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND);
+    public void readFromNBT(NBTTagCompound tagCompound) {
+    	
+        NBTTagList itemsList = tagCompound.getTagList("Items", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND);
         for (byte i = 0; i < itemsList.tagCount(); i++) {
             NBTTagCompound item = itemsList.getCompoundTagAt(i);
             byte slot = item.getByte("Slot");
             if (slot >= 0 && slot < getSizeInventory()) {
-                inventory[slot] = ItemStack.loadItemStackFromNBT(item);
-                System.out.println(inventory[slot].getDisplayName());
+                inventory[i] = ItemStack.loadItemStackFromNBT(item);
             }
         }
-
     }
 
     public abstract boolean checkToCraft();

@@ -3,6 +3,7 @@ package com.lionzxy.betterworkbench.common.container.base;
 import java.util.Iterator;
 
 import com.lionzxy.betterworkbench.common.inventory.base.WorkBenchInventory;
+import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,25 +23,25 @@ import net.minecraft.world.World;
  * Created by LionZXY on 23.10.2015. BetterWorkbench
  */
 public abstract class BaseContainer extends Container {
-	public IInventory inventory;
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
+	IInventory inventory;
 	boolean blocked = false;
-	
+	EntityPlayer player;
+	SlotCrafting slot;
 
 	public BaseContainer(IInventory inventory, EntityPlayer player) {
-		super();
 		this.inventory = inventory;
-		this.addSlotToContainer(new SlotCrafting(player, craftMatrix, this.inventory, 9, 124, 35));
-		blocked = true;
-		for(int i = 0; i < 9; i++){
-			craftMatrix.setInventorySlotContents(i, inventory.getStackInSlot(i));
+		this.player = player;
+		slot = new SlotCrafting(player, craftMatrix, inventory, 9, 124, 35);
+		for(int i = 0; i < craftMatrix.getSizeInventory(); i++){
+			if(inventory.getStackInSlot(i) != null)
+				craftMatrix.setInventorySlotContents(i, inventory.getStackInSlot(i));
 		}
-		blocked = false;
+		this.addSlotToContainer(slot);
 		addCraftingGrid(craftMatrix, 0, 30, 17, 3, 3);
 		addPlayerInventory(player.inventory);
-		onCraftMatrixChanged(this.inventory);
+		onCraftMatrixChanged(inventory);
 	}
-	
 
 	@Override
 	public boolean canInteractWith(EntityPlayer p_75145_1_) {
@@ -130,21 +131,15 @@ public abstract class BaseContainer extends Container {
         }
         return itemstack;
 	}
-	
 
 	public void onCraftMatrixChanged(IInventory inv) {
-		if(blocked)
-			return;
-		blocked = true;
-		for(int i = 0; i < 9; i++){
-			this.inventory.setInventorySlotContents(i, craftMatrix.getStackInSlot(i));
-		}
-		if(inventory instanceof TileEntity)
-		inventory.setInventorySlotContents(9,
-				CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, ((TileEntity)inventory).getWorldObj()));
-		else if(inventory instanceof WorkBenchInventory)
-			inventory.setInventorySlotContents(9,
-					CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, ((WorkBenchInventory)inventory).getPlayer().worldObj));
-		blocked = false;
+		slot.putStack(CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, player.worldObj));
 	}
+	
+    public void onContainerClosed(EntityPlayer p_75134_1_)
+    {
+    	for(int i = 0; i < craftMatrix.getSizeInventory(); i++){
+    		inventory.setInventorySlotContents(i, craftMatrix.getStackInSlot(i));
+    	}
+    }
 }

@@ -2,6 +2,7 @@ package com.lionzxy.betterworkbench.common.block.base;
 
 import com.lionzxy.betterworkbench.BetterWorkbench;
 import com.lionzxy.betterworkbench.tileentity.SimplyTileEntity;
+import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import com.lionzxy.betterworkbench.utils.Constant;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -19,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -71,18 +73,41 @@ public abstract class BaseBlock extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side) {
+    	int facing = ((BaseTileEntity) access.getTileEntity(x, y, z)).facing;
         switch (side) {
             case 0:
                 return bottom;
             case 1:
                 return top;
         }
+        if(facing == side)
+        	return front;
         return blockIcon;
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
         return new SimplyTileEntity();
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack) {
+        int facing = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        BaseTileEntity tile = (BaseTileEntity) world.getTileEntity(x, y, z);
+        switch(facing){
+        case 0 : 
+        	tile.facing = 2;
+        	break;
+        case 1 :
+            tile.facing = 5;
+            break;
+        case 2 :
+            tile.facing = 3;
+            break;
+        case 3 :
+            tile.facing = 4;
+            break;
+        }
     }
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {

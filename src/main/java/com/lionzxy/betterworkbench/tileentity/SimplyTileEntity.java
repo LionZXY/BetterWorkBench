@@ -1,7 +1,9 @@
 package com.lionzxy.betterworkbench.tileentity;
 
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by LionZXY on 24.10.2015.
@@ -10,11 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 public class SimplyTileEntity extends BaseTileEntity {
     public SimplyTileEntity() {
         super();
-    }
-
-    @Override
-    public int getSizeInventory() {
-        return 10;
     }
 
     @Override

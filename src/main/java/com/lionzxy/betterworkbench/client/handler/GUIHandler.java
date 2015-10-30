@@ -48,7 +48,7 @@ public class GUIHandler implements IGuiHandler {
                     return null;
                 }
                 if (world.getTileEntity(x, y, z) instanceof BaseTileEntity) {
-                    return new SimplyWorkBenchGui((BaseTileEntity) world.getTileEntity(x, y, z),player);
+                    return new SimplyWorkBenchGui((BaseTileEntity) world.getTileEntity(x, y, z), player);
                 }
                 return null;
             case SIMPLY_WORKBENCH_ITEM:
