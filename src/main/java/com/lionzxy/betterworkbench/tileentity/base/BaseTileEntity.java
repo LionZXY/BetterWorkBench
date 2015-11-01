@@ -1,5 +1,7 @@
 package com.lionzxy.betterworkbench.tileentity.base;
 
+import com.lionzxy.betterworkbench.BetterWorkbench;
+import com.lionzxy.betterworkbench.network.NBTMessage;
 import com.lionzxy.betterworkbench.tileentity.SimplyTileEntity;
 
 import net.minecraft.block.BlockChest;
@@ -27,6 +29,7 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     public BaseTileEntity() {
         super();
+        BetterWorkbench.network.network.sendToServer(new NBTMessage().set(this));
     }
 
     @Override
