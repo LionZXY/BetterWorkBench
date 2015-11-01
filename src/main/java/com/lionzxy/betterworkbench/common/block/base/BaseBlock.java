@@ -5,6 +5,7 @@ import com.lionzxy.betterworkbench.tileentity.SimplyTileEntity;
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import com.lionzxy.betterworkbench.utils.Constant;
 
+import com.lionzxy.betterworkbench.utils.WorldHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,12 +18,15 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public abstract class BaseBlock extends BlockContainer {
 
@@ -95,7 +99,7 @@ public abstract class BaseBlock extends BlockContainer {
         int facing = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         BaseTileEntity tile = (BaseTileEntity) world.getTileEntity(x, y, z);
         switch(facing){
-        case 0 : 
+        case 0 :
         	tile.facing = 2;
         	break;
         case 1 :
@@ -117,4 +121,17 @@ public abstract class BaseBlock extends BlockContainer {
         }
         return false;
     }
+
+    public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_)
+    {
+        WorldHelper.spawnItemStack(world,x,y,z,this.getItemStack(world.getTileEntity(x,y,z)));
+        super.breakBlock(world, x, y, z, block, p_149749_6_);
+    }
+
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+    {
+        return null;
+    }
+
+    public abstract ItemStack getItemStack(TileEntity tileEntity);
 }
