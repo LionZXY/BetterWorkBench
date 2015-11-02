@@ -57,7 +57,9 @@ public class SimplyWorkBenchGui extends GuiContainer {
     }
 
     public void generate(int x) {
-        int columns = ((guiLeft - 48) / 18);
+        //TODO
+        /*
+
         if (x < (columns + 2))
             columns = x - 2;
         int row = x / columns;
@@ -99,7 +101,7 @@ public class SimplyWorkBenchGui extends GuiContainer {
             thisX += 18;
         }
         drawTexturedModalRect(thisX, thisY, 176, 108, 25, 36);
-        thisX = startX;
+        thisX = startX;*/
 
     }
 
