@@ -58,6 +58,8 @@ public class SimplyWorkBenchGui extends GuiContainer {
 
     public void generate(int x) {
         //TODO
+
+
         /*
 
         if (x < (columns + 2))
