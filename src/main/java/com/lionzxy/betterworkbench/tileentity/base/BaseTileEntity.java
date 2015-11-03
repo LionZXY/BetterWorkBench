@@ -137,6 +137,18 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
             }
         }
     }
+    
+    public void readFromItemNBT(NBTTagCompound tagCompound) {
+        NBTTagList itemsList = tagCompound.getTagList("Items", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND);
+        for (byte i = 0; i < itemsList.tagCount(); i++) {
+            NBTTagCompound item = itemsList.getCompoundTagAt(i);
+            byte slot = item.getByte("Slot");
+            if (slot >= 0 && slot < getSizeInventory()) {
+            	inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+            }
+        }
+    }
+    
 
     public abstract boolean checkToCraft();
 }

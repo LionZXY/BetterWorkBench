@@ -3,10 +3,15 @@
 # eclipse
 /eclipse
 /bin/*
+/.settings/*
+/.metadata/*
 
-# idea
-.idea
+*.psd
 *.iml
+*.iws
+*.classpath
+*.project
+*.lock
 
 # gradle
 build

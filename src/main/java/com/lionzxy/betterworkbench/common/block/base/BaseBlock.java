@@ -43,21 +43,16 @@ public abstract class BaseBlock extends BlockContainer {
     protected int GUI_ID;
 
 
-    public BaseBlock(String name, int guiid) {
-        super(new Material(MapColor.brownColor));
-        this.name = name;
-        setBlockName(Constant.MODID + ".block." + name);
-        setCreativeTab(BetterWorkbench.BWTab);
-        GameRegistry.registerBlock(this, name);
-        GUI_ID = guiid;
+    public BaseBlock(String name, Class item, int guiid) {
+        this(name, item, false, false, false, guiid);
     }
 
-    public BaseBlock(String name, boolean hasFront, boolean hasTop, boolean hasBottom, int guiid) {
+    public BaseBlock(String name, Class item, boolean hasFront, boolean hasTop, boolean hasBottom, int guiid) {
         super(new Material(MapColor.brownColor));
         this.name = name;
         setBlockName(Constant.MODID + ".block." + name);
         setCreativeTab(BetterWorkbench.BWTab);
-        GameRegistry.registerBlock(this, name);
+        GameRegistry.registerBlock(this, item, name);
         this.hasFront = hasFront;
         this.hasTop = hasTop;
         this.hasBottom = hasBottom;

@@ -13,8 +13,8 @@ public class ItemSimplyWorkBench extends BaseItem {
     /*
      *@guiId по идее всегда должен быть равен единице
      */
-    public ItemSimplyWorkBench(int guiId, Block block) {
-        super("simplyworkbench", guiId, block);
+    public ItemSimplyWorkBench(Block block) {
+        super(block);
     }
 }
 

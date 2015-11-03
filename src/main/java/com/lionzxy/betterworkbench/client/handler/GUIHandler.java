@@ -32,7 +32,8 @@ public class GUIHandler implements IGuiHandler {
                 }
                 return null;
             case SIMPLY_WORKBENCH_ITEM:
-                return new SimplyContainer(new SimplyInventory(player.getCurrentEquippedItem(), player), player, (new SimplyInventory(player.getCurrentEquippedItem(), player)).inventory);
+            	SimplyInventory inventory = new SimplyInventory(player.getCurrentEquippedItem(), player);
+                return new SimplyContainer(inventory, player, (inventory).inventory);
             default:
                 return null;
         }
@@ -52,7 +53,8 @@ public class GUIHandler implements IGuiHandler {
                 }
                 return null;
             case SIMPLY_WORKBENCH_ITEM:
-                return new SimplyWorkBenchGui(new SimplyInventory(player.getCurrentEquippedItem(), player), player, (new SimplyInventory(player.getCurrentEquippedItem(), player)).inventory);
+            	SimplyInventory inventory = new SimplyInventory(player.getCurrentEquippedItem(), player);
+                return new SimplyWorkBenchGui(inventory, player, (inventory).inventory);
             default:
                 return null;
         }

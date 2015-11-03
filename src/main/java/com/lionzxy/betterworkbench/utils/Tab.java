@@ -1,5 +1,6 @@
 package com.lionzxy.betterworkbench.utils;
 
+import com.lionzxy.betterworkbench.common.block.BlockInit;
 import com.lionzxy.betterworkbench.common.item.ItemInit;
 
 import net.minecraft.creativetab.CreativeTabs;

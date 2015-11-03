@@ -9,6 +9,7 @@ import com.lionzxy.betterworkbench.utils.ExtendedInventoryCrafting;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ibxm.Player;
+import invtweaks.api.container.InventoryContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -23,6 +24,7 @@ import net.minecraft.world.World;
 /**
  * Created by LionZXY on 23.10.2015. BetterWorkbench
  */
+@InventoryContainer
 public abstract class BaseContainer extends Container {
 	public ExtendedInventoryCrafting craftMatrix;
 	IInventory inventory;

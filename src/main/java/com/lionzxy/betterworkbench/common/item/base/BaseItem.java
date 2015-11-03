@@ -1,44 +1,57 @@
 package com.lionzxy.betterworkbench.common.item.base;
 
 import com.lionzxy.betterworkbench.BetterWorkbench;
+import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import com.lionzxy.betterworkbench.utils.Constant;
+
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 /**
  * Created by LionZXY on 23.10.2015.
  * BetterWorkbench
  */
-public abstract class BaseItem extends Item{
+public abstract class BaseItem extends ItemBlock{
 
     public int GUI_ID;
     public Block block;
+    String name;
+    IIcon icon;
 
-    public BaseItem(String name, int guiid) {
-        this.setTextureName(Constant.MODID + ":" + name);
-        this.setUnlocalizedName(name);
-        this.setCreativeTab(BetterWorkbench.BWTab);
-        GameRegistry.registerItem(this, name);
-        this.GUI_ID = guiid;
-    }
-
-    public BaseItem(String name, int guiid, Block block) {
-        this.setTextureName(Constant.MODID + ":" + name);
-        this.setUnlocalizedName(name);
-        this.setCreativeTab(BetterWorkbench.BWTab);
-        GameRegistry.registerItem(this, name);
-        this.GUI_ID = guiid;
+    public BaseItem(Block block) {
+        super(block);
         this.block = block;
-        System.out.println(this.block);
     }
+    
+    @SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister iconRegister) {
+		icon = iconRegister.registerIcon(Constant.MODID + ":" + name);
+	}
+
+    public Item register(String name, int guiid){
+    	this.name = name;
+    	this.setTextureName(Constant.MODID + ":" + name);
+        this.setUnlocalizedName(name);
+        this.GUI_ID = guiid;
+        return this;
+    }
+    
+    @Override
+	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining){
+		return icon;
+	}
 
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
     	//Чтоб открывался только на клиентской стороне, как я понял
@@ -78,7 +91,7 @@ public abstract class BaseItem extends Item{
     		world.setBlock(x, y, z, block);
     		world.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D, block.stepSound.func_150496_b(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
             if(itemStack.hasTagCompound())
-                world.getTileEntity(x,y,z).readFromNBT(itemStack.getTagCompound());
+                ((BaseTileEntity)world.getTileEntity(x,y,z)).readFromItemNBT(itemStack.getTagCompound());
         }
     }
 }
