@@ -58,6 +58,7 @@ public abstract class BaseItem extends ItemBlock{
 
     	if (world.isRemote || player.isSneaking())
         	return itemStack;
+
         //Основной код открытия гуи
         player.openGui(BetterWorkbench.getInstance(), GUI_ID, world, (int) player.posX, (int) player.posY, (int) player.posZ);
         return itemStack;
