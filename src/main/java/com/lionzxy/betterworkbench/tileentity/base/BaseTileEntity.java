@@ -22,10 +22,10 @@ import net.minecraft.tileentity.TileEntityFurnace;
  * BetterWorkbench
  */
 public abstract class BaseTileEntity extends TileEntity implements IInventory {
-    
-	public int facing;
-	public ItemStack craftResult;
-	public ItemStack[] inventory = new ItemStack[10];
+
+    public int facing;
+    public ItemStack craftResult;
+    public ItemStack[] inventory = new ItemStack[10];
 
     public BaseTileEntity() {
         super();
@@ -33,16 +33,16 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
     }
 
     @Override
-    public int getSizeInventory(){
-    	return 10;
+    public int getSizeInventory() {
+        return 10;
     }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-    	if(slot < getSizeInventory())
-    		return inventory[slot];
-    	else 
-    		return (ItemStack)null;
+        if (slot < getSizeInventory())
+            return inventory[slot];
+        else
+            return (ItemStack) null;
     }
 
     @Override
@@ -61,17 +61,17 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     @Override
     public ItemStack getStackInSlotOnClosing(int slot) {
-    	return inventory[slot];
+        return inventory[slot];
     }
-    
+
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
-    	if(slot < getSizeInventory()){
-    		inventory[slot] = itemStack;
-        	if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
-           		itemStack.stackSize = this.getInventoryStackLimit();
-        	}
-    	}
+        if (slot < getSizeInventory()) {
+            inventory[slot] = itemStack;
+            if (itemStack != null && itemStack.stackSize > this.getInventoryStackLimit()) {
+                itemStack.stackSize = this.getInventoryStackLimit();
+            }
+        }
 
         markDirty();
     }
@@ -94,7 +94,7 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
     public void markDirty() {
         for (int i = 0; i < getSizeInventory(); i++) {
             if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0)
-            	inventory[i] = null;
+                inventory[i] = null;
         }
         checkToCraft();
     }
@@ -103,10 +103,10 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
     public boolean isUseableByPlayer(EntityPlayer player) {
         return true;
     }
-    
+
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-    	return true;
+        return true;
     }
 
     public void writeToNBT(NBTTagCompound tagCompound) {
@@ -115,10 +115,10 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
         NBTTagList itemsList = new NBTTagList();
         for (byte i = 0; i < getSizeInventory(); i++) {
             if (inventory != null) {
-            	NBTTagCompound slotTag = new NBTTagCompound();
-                slotTag.setByte("Slot", (byte)i);
-                if(this.inventory[i] != null)
-                	this.inventory[i].writeToNBT(slotTag);
+                NBTTagCompound slotTag = new NBTTagCompound();
+                slotTag.setByte("Slot", (byte) i);
+                if (this.inventory[i] != null)
+                    this.inventory[i].writeToNBT(slotTag);
                 itemsList.appendTag(slotTag);
             }
         }
@@ -133,22 +133,22 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
             NBTTagCompound item = itemsList.getCompoundTagAt(i);
             byte slot = item.getByte("Slot");
             if (slot >= 0 && slot < getSizeInventory()) {
-            	inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+                inventory[slot] = ItemStack.loadItemStackFromNBT(item);
             }
         }
     }
-    
+
     public void readFromItemNBT(NBTTagCompound tagCompound) {
         NBTTagList itemsList = tagCompound.getTagList("Items", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND);
         for (byte i = 0; i < itemsList.tagCount(); i++) {
             NBTTagCompound item = itemsList.getCompoundTagAt(i);
             byte slot = item.getByte("Slot");
             if (slot >= 0 && slot < getSizeInventory()) {
-            	inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+                inventory[slot] = ItemStack.loadItemStackFromNBT(item);
             }
         }
     }
-    
+
 
     public abstract boolean checkToCraft();
 }

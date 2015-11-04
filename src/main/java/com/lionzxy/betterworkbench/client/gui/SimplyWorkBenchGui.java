@@ -40,7 +40,8 @@ public class SimplyWorkBenchGui extends GuiContainer {
 
     public SimplyWorkBenchGui(IInventory workBenchInventory, EntityPlayer player, ItemStack[] itemList) {
         super(new SimplyContainer(workBenchInventory, player, itemList));
-        slotsVal = 21;
+        if(this.inventorySlots instanceof BaseContainer)
+            slotsVal =  ((BaseContainer) this.inventorySlots).addSlot;
     }
 
 
