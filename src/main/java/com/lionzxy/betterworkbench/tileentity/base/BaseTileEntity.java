@@ -1,21 +1,20 @@
 package com.lionzxy.betterworkbench.tileentity.base;
 
 import com.lionzxy.betterworkbench.BetterWorkbench;
-import com.lionzxy.betterworkbench.network.NBTMessage;
-import com.lionzxy.betterworkbench.tileentity.SimplyTileEntity;
+import com.lionzxy.betterworkbench.network.message.GUIToServerMessage;
+import com.lionzxy.betterworkbench.network.message.NBTMessage;
 
-import net.minecraft.block.BlockChest;
+import com.lionzxy.betterworkbench.network.message.SlotToClientMessage;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LionZXY on 24.10.2015.
@@ -23,7 +22,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
  */
 public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
-    public int facing;
+    public int facing, guiLeft, guiTop, slots, tickPlus = 0;
     public ItemStack craftResult;
     public ItemStack[] inventory = new ItemStack[10];
 
@@ -146,6 +145,49 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
             if (slot >= 0 && slot < getSizeInventory()) {
                 inventory[slot] = ItemStack.loadItemStackFromNBT(item);
             }
+        }
+    }
+
+    public void syncMessage(int guiLeft, int guiTop) {
+        //Синхронизация раз в 20 тиков.
+        if (tickPlus == 20 && FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+            System.out.println(this.guiLeft + " " + this.guiTop + " " + slots + " IsClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
+            BetterWorkbench.network.network.sendToServer(new GUIToServerMessage().set(this, guiTop, guiLeft));
+            this.guiLeft = guiLeft;
+            this.guiTop = guiTop;
+            tickPlus = 0;
+        } else if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
+            System.out.println(this.guiLeft + " " + this.guiTop + " " + slots + " IsClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
+            this.guiLeft = guiLeft;
+            this.guiTop = guiTop;
+            setSlots();
+            BetterWorkbench.network.network.sendToServer(new SlotToClientMessage().set(this, slots));
+        }
+        tickPlus++;
+    }
+
+    public void setSlots() {
+        BaseTileEntity workbench = this;
+        List<IInventory> inventories = new ArrayList<IInventory>();
+
+        if (workbench.getWorldObj().getTileEntity(workbench.xCoord - 1, workbench.yCoord, workbench.zCoord) != null &&
+                workbench.getWorldObj().getTileEntity(workbench.xCoord - 1, workbench.yCoord, workbench.zCoord) instanceof IInventory)
+            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord - 1, workbench.yCoord, workbench.zCoord));
+
+        if (workbench.getWorldObj().getTileEntity(workbench.xCoord + 1, workbench.yCoord, workbench.zCoord) != null &&
+                workbench.getWorldObj().getTileEntity(workbench.xCoord + 1, workbench.yCoord, workbench.zCoord) instanceof IInventory)
+            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord + 1, workbench.yCoord, workbench.zCoord));
+
+        if (workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord - 1) != null &&
+                workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord - 1) instanceof IInventory)
+            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord - 1));
+
+        if (workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1) != null &&
+                workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1) instanceof IInventory)
+            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1));
+        slots = 0;
+        for (IInventory inventory : inventories) {
+            slots += inventory.getSizeInventory();
         }
     }
 

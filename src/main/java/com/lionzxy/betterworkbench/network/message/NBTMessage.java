@@ -1,11 +1,11 @@
-package com.lionzxy.betterworkbench.network;
+package com.lionzxy.betterworkbench.network.message;
 
-import com.lionzxy.betterworkbench.BetterWorkbench;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -47,7 +47,7 @@ public class NBTMessage implements IMessage, IMessageHandler<NBTMessage,IMessage
 
     @Override
     public IMessage onMessage(NBTMessage m, MessageContext ctx) {
-        TileEntity te = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(m.x,m.y,m.z);
+        TileEntity te = Minecraft.getMinecraft().thePlayer.worldObj.getTileEntity(m.x,m.y,m.z);
         if(te != null)
             te.readFromNBT(m.tagCompound);
         return null;

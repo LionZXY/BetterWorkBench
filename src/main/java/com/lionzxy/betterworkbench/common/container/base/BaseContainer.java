@@ -20,11 +20,10 @@ import java.util.List;
 @InventoryContainer
 public abstract class BaseContainer extends Container {
     public ExtendedInventoryCrafting craftMatrix;
-    IInventory inventory;
+    public IInventory inventory;
     boolean blocked = false;
     EntityPlayer player;
     SlotCrafting slot;
-    public int addSlot = 0;
 
     public BaseContainer(IInventory inventory, EntityPlayer player, ItemStack[] itemList) {
         this.inventory = inventory;
@@ -34,7 +33,6 @@ public abstract class BaseContainer extends Container {
         this.addSlotToContainer(slot);
         addCraftingGrid(craftMatrix, 0, 30, 17, 3, 3);
         addPlayerInventory(player.inventory);
-        addOtherInventorySlots();
         onCraftMatrixChanged(inventory);
     }
 
@@ -116,39 +114,9 @@ public abstract class BaseContainer extends Container {
         slot.putStack(CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, player.worldObj));
     }
 
-    public void addOtherInventorySlots() {
-        if (!(inventory instanceof BaseTileEntity))
-            return;
-        BaseTileEntity workbench = (BaseTileEntity) inventory;
-        List<IInventory> inventories = new ArrayList<IInventory>();
-
-        if (workbench.getWorldObj().getTileEntity(workbench.xCoord - 1, workbench.yCoord, workbench.zCoord) != null &&
-                workbench.getWorldObj().getTileEntity(workbench.xCoord - 1, workbench.yCoord, workbench.zCoord) instanceof IInventory)
-            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord - 1, workbench.yCoord, workbench.zCoord));
-
-        if (workbench.getWorldObj().getTileEntity(workbench.xCoord + 1, workbench.yCoord, workbench.zCoord) != null &&
-                workbench.getWorldObj().getTileEntity(workbench.xCoord + 1, workbench.yCoord, workbench.zCoord) instanceof IInventory)
-            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord + 1, workbench.yCoord, workbench.zCoord));
-
-        if (workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord - 1) != null &&
-                workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord - 1) instanceof IInventory)
-            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord - 1));
-
-        if (workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1) != null &&
-                workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1) instanceof IInventory)
-            inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1));
-
-        for (IInventory inventory : inventories) {
-            addSlot += inventory.getSizeInventory();
-        }
-        /*
-        if (addSlot == 0)
-            return;
-
-        int columns = ((guiLeft - 48) / 18) + 2;
-        if (slotsVal < columns)
-            columns = slotsVal;
-        int startX = -7 - columns * 18;*/
-
+    public int getSizeAddInventory(){
+        if(!(inventory instanceof BaseTileEntity))
+            return 0;
+        return ((BaseTileEntity) inventory).slots;
     }
 }

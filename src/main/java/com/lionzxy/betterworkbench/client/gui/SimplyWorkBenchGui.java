@@ -35,13 +35,11 @@ public class SimplyWorkBenchGui extends GuiContainer {
     //176 54 : 200 71 - ������� ������ 25 18
     //202 36 : 219 53 - ���� 17
     //176 133 193 149
-    public int slotsVal;
     protected ResourceLocation background = new ResourceLocation(Constant.MODID, "textures/gui/crafting_table.png");
 
     public SimplyWorkBenchGui(IInventory workBenchInventory, EntityPlayer player, ItemStack[] itemList) {
         super(new SimplyContainer(workBenchInventory, player, itemList));
-        if(this.inventorySlots instanceof BaseContainer)
-            slotsVal =  ((BaseContainer) this.inventorySlots).addSlot;
+
     }
 
 
@@ -49,6 +47,7 @@ public class SimplyWorkBenchGui extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         this.fontRendererObj.drawString(StatCollector.translateToLocal("workbench.simply"), 28, 6, 0x404040);
         this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, 74, 0x404040);
+        int slotsVal = getSizeAddInventory();
         if (slotsVal == 0)
             return;
         int columns = ((guiLeft - 48) / 18) + 2;
@@ -62,9 +61,10 @@ public class SimplyWorkBenchGui extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         mc.renderEngine.bindTexture(background);
-        //System.out.println("Left: " + guiLeft + " Top: " + guiTop);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, 176, 166);
-        generate(slotsVal);
+        if (this.inventorySlots instanceof BaseContainer && ((BaseContainer) this.inventorySlots).inventory instanceof BaseTileEntity)
+            ((BaseTileEntity) ((BaseContainer) this.inventorySlots).inventory).syncMessage(guiLeft, guiTop);
+        generate(getSizeAddInventory());
     }
 
     public void generate(int x) {
@@ -154,6 +154,12 @@ public class SimplyWorkBenchGui extends GuiContainer {
 
         }
 
+    }
+
+    public int getSizeAddInventory() {
+        if (this.inventorySlots instanceof BaseContainer)
+            return ((BaseContainer) this.inventorySlots).getSizeAddInventory();
+        return 0;
     }
 
 }
