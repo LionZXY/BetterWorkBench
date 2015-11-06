@@ -3,11 +3,9 @@ package com.lionzxy.betterworkbench.client.handler;
 import com.lionzxy.betterworkbench.client.gui.SimplyWorkBenchGui;
 import com.lionzxy.betterworkbench.common.container.SimplyContainer;
 import com.lionzxy.betterworkbench.common.inventory.SimplyInventory;
-import com.lionzxy.betterworkbench.tileentity.SimplyTileEntity;
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**

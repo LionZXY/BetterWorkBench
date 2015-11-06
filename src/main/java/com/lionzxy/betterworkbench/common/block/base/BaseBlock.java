@@ -4,18 +4,15 @@ import com.lionzxy.betterworkbench.BetterWorkbench;
 import com.lionzxy.betterworkbench.tileentity.SimplyTileEntity;
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import com.lionzxy.betterworkbench.utils.Constant;
-
 import com.lionzxy.betterworkbench.utils.WorldHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

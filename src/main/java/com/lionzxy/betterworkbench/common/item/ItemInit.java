@@ -2,7 +2,6 @@ package com.lionzxy.betterworkbench.common.item;
 
 import com.lionzxy.betterworkbench.client.handler.GUIHandler;
 import com.lionzxy.betterworkbench.common.block.BlockInit;
-
 import net.minecraft.item.Item;
 
 /**

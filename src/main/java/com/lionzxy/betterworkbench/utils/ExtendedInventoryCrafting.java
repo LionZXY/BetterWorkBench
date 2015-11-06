@@ -1,11 +1,10 @@
 package com.lionzxy.betterworkbench.utils;
 
-import java.lang.reflect.Field;
-
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+
+import java.lang.reflect.Field;
 
 public class ExtendedInventoryCrafting extends InventoryCrafting{
 	

@@ -1,7 +1,6 @@
 package com.lionzxy.betterworkbench.common.item;
 
 import com.lionzxy.betterworkbench.common.item.base.BaseItem;
-
 import net.minecraft.block.Block;
 
 /**

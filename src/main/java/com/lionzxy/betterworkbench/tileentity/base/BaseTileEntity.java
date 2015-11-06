@@ -3,8 +3,8 @@ package com.lionzxy.betterworkbench.tileentity.base;
 import com.lionzxy.betterworkbench.BetterWorkbench;
 import com.lionzxy.betterworkbench.network.message.GUIToServerMessage;
 import com.lionzxy.betterworkbench.network.message.NBTMessage;
-
 import com.lionzxy.betterworkbench.network.message.SlotToClientMessage;
+import com.lionzxy.betterworkbench.utils.Constant;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -150,14 +150,14 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
 
     public void syncMessage(int guiLeft, int guiTop) {
         //Синхронизация раз в 20 тиков.
-        if (tickPlus == 20 && FMLCommonHandler.instance().getEffectiveSide().isClient()) {
-            System.out.println(this.guiLeft + " " + this.guiTop + " " + slots + " IsClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
+        if (tickPlus == Constant.SYNC_PER_TICK && FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+            //System.out.println(this.guiLeft + " " + this.guiTop + " " + slots + " IsClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
             BetterWorkbench.network.network.sendToServer(new GUIToServerMessage().set(this, guiTop, guiLeft));
             this.guiLeft = guiLeft;
             this.guiTop = guiTop;
             tickPlus = 0;
         } else if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
-            System.out.println(this.guiLeft + " " + this.guiTop + " " + slots + " IsClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
+            //System.out.println(this.guiLeft + " " + this.guiTop + " " + slots + " IsClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
             this.guiLeft = guiLeft;
             this.guiTop = guiTop;
             setSlots();

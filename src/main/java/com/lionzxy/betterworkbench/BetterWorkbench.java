@@ -5,12 +5,9 @@ import com.lionzxy.betterworkbench.common.Init;
 import com.lionzxy.betterworkbench.network.Network;
 import com.lionzxy.betterworkbench.utils.Constant;
 import com.lionzxy.betterworkbench.utils.Tab;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraft.creativetab.CreativeTabs;
 
 /**

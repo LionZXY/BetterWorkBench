@@ -1,22 +1,15 @@
 package com.lionzxy.betterworkbench.client.gui;
 
-import com.lionzxy.betterworkbench.BetterWorkbench;
 import com.lionzxy.betterworkbench.common.container.SimplyContainer;
 import com.lionzxy.betterworkbench.common.container.base.BaseContainer;
-import com.lionzxy.betterworkbench.common.inventory.base.WorkBenchInventory;
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import com.lionzxy.betterworkbench.utils.Constant;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
 
 /**

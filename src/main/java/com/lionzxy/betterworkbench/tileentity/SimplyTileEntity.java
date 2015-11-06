@@ -2,9 +2,6 @@ package com.lionzxy.betterworkbench.tileentity;
 
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-
 /**
  * Created by LionZXY on 24.10.2015.
  * BetterWorkbench
