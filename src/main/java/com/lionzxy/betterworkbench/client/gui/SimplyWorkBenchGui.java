@@ -17,22 +17,10 @@ import org.lwjgl.opengl.GL11;
  * BetterWorkbench
  */
 public class SimplyWorkBenchGui extends GuiContainer {
-
-    //176 72 : 200 107 - ��������� ����� ������ 25 : 36
-    //202 72 : 226 107 - ��������� ������ ������ 25 : 36
-    //202 108 : 226 132 - ��������� ����� �����
-    //176 108 : 200 132 - ��������� ������ �����
-    //176 0 : 193 35 - ������� ����� 18 : 36
-    //194 0 : 211 23 - ������� ����
-    //176 36 : 200 53 - ������� ����� 25 18
-    //176 54 : 200 71 - ������� ������ 25 18
-    //202 36 : 219 53 - ���� 17
-    //176 133 193 149
     protected ResourceLocation background = new ResourceLocation(Constant.MODID, "textures/gui/crafting_table.png");
 
     public SimplyWorkBenchGui(IInventory workBenchInventory, EntityPlayer player, ItemStack[] itemList) {
         super(new SimplyContainer(workBenchInventory, player, itemList));
-
     }
 
 
