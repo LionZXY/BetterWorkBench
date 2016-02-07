@@ -26,7 +26,7 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
     public int facing, guiLeft = -1, guiTop = -1, slots = 0, tickPlus = 0;
     public ItemStack[] inventory = new ItemStack[10];
     public BaseContainer container = null;
-    boolean first = true;
+    int step = 0;
 
     public BaseTileEntity() {
         super();
@@ -158,14 +158,17 @@ public abstract class BaseTileEntity extends TileEntity implements IInventory {
             this.guiLeft = guiLeft;
             this.guiTop = guiTop;
             tickPlus = 0;
+            step++;
+            if (container != null && step == 10)
+                container.addAddSlot();
         } else if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             //System.out.println(this.guiLeft + " " + this.guiTop + " " + slots + " IsClient:" + FMLCommonHandler.instance().getEffectiveSide().isClient());
             this.guiLeft = guiLeft;
             this.guiTop = guiTop;
+            if (container != null)
+                container.addAddSlot();
             //BetterWorkbench.network.network.sendToServer(new SlotToClientMessage().set(this, slots));
         }
-        if (container != null)
-            container.addAddSlot();
         tickPlus++;
     }
 

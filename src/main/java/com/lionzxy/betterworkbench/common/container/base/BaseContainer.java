@@ -2,6 +2,7 @@ package com.lionzxy.betterworkbench.common.container.base;
 
 import com.lionzxy.betterworkbench.tileentity.base.BaseTileEntity;
 import com.lionzxy.betterworkbench.utils.ExtendedInventoryCrafting;
+import cpw.mods.fml.common.FMLCommonHandler;
 import invtweaks.api.container.InventoryContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,6 +13,7 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,12 +156,19 @@ public abstract class BaseContainer extends Container {
         if (workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1) != null &&
                 workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1) instanceof IInventory)
             inventories.add((IInventory) workbench.getWorldObj().getTileEntity(workbench.xCoord, workbench.yCoord, workbench.zCoord + 1));
-        //Костыль пока.
-        if (first) {
-            for (IInventory inventory : inventories)
-                workbench.slots += inventory.getSizeInventory();
+        for (IInventory inventory : inventories)
+            workbench.slots += inventory.getSizeInventory();
+        if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+        System.out.println("1 " + FMLCommonHandler.instance().getEffectiveSide().toString() + " " + inventorySlots.size() + " " + (workbench.slots + 46));
+
+
+        if (inventorySlots.size() < workbench.slots + 46) {
+            if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+            System.out.println(FMLCommonHandler.instance().getEffectiveSide().toString() + " " + workbench.slots + " " + workbench.guiLeft + " " + workbench.guiTop);
             if (workbench.slots == 0 || workbench.guiLeft == -1 || workbench.guiTop == -1)
                 return;
+            if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+                System.out.println(2 + " " + FMLCommonHandler.instance().getEffectiveSide().toString() + " " + workbench.slots + " " + workbench.guiLeft + " " + workbench.guiTop);
             int columns = ((workbench.guiLeft - 48) / 18) + 2;
             if (workbench.slots < columns)
                 columns = workbench.slots;
@@ -170,7 +179,7 @@ public abstract class BaseContainer extends Container {
 
             for (IInventory inventory : inventories) {
                 for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                    super.addSlotToContainer(new Slot(inventory, i, thisX, thisY));
+                    this.addSlotToContainer(new Slot(inventory, i, thisX, thisY));
                     thisX += 18;
                     if (thisX > -7) {
                         thisX = startX;
@@ -178,7 +187,16 @@ public abstract class BaseContainer extends Container {
                     }
                 }
             }
-            first = false;
         }
+    }
+
+    @Override
+    protected Slot addSlotToContainer(Slot p_75146_1_) {
+        p_75146_1_.slotNumber = this.inventorySlots.size();
+        this.inventorySlots.add(p_75146_1_);
+        if(FMLCommonHandler.instance().getEffectiveSide().isServer())
+        System.out.println(FMLCommonHandler.instance().getEffectiveSide().toString() + " " + inventorySlots.size());
+        this.inventoryItemStacks.add((Object) null);
+        return p_75146_1_;
     }
 }
